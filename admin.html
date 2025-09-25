@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin</title><link rel="stylesheet" href="/styles.css"></head><body>
+<main class="container card"><div id="adminLogin"><input id="adminEmail" placeholder="admin email"><input id="adminPass" placeholder="password" type="password"><button onclick="adminSignIn()">Sign In</button></div><div id="adminPanel" class="hidden">
+<div class="admin-tabs"><button onclick="showTab('content')">Content</button><button onclick="showTab('subscribers')">Subscribers</button><button onclick="showTab('donations')">Donations</button><button onclick="showTab('members')">Members</button><button onclick="showTab('settings')">Settings</button><button onclick="logout()">Logout</button></div>
+<div id="content" class="tabpane"><h3>Create Post</h3><input id="adminPostTitle"><textarea id="adminPostBody"></textarea><input type="file" id="adminPostImage"><button onclick="adminCreatePost()">Publish</button></div>
+<div id="subscribers" class="tabpane hidden"><h3>Subscribers</h3><ul id="subscriberList"></ul><button onclick="exportSubscribers()">Export CSV</button></div>
+<div id="donations" class="tabpane hidden"><h3>Donations</h3><input id="adminPaypal" placeholder="PayPal Client ID"><input id="adminPlanId" placeholder="PayPal Plan ID"><input id="adminCash" placeholder="CashApp Cashtag"><button onclick="saveDonationSettings()">Save</button></div>
+<div id="members" class="tabpane hidden"><h3>Members</h3><ul id="memberList"></ul></div>
+<div id="settings" class="tabpane hidden"><h3>Site Settings</h3><input id="adminTitle" placeholder="Site title"><input id="adminTag" placeholder="Site tagline"><label>Upload logo <input type="file" id="adminLogo"></label><button onclick="saveSiteSettings()">Save</button></div>
+</div></main>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="/config.js"></script><script src="/admin.js"></script></body></html>

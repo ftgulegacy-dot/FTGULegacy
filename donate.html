@@ -1,0 +1,5 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Donate</title><link rel="stylesheet" href="/styles.css"></head><body>
+<main class="container card"><h2>Donate</h2><div id="paypalSection"><h3>PayPal</h3><div id="paypal-button-container"></div></div><div id="cashSection"><h3>CashApp</h3><label>Amount <input id="cashAmount" type="number" value="5" min="1"></label><button onclick="cashDonate()">Donate via CashApp</button><div id="cashQR"></div></div></main>
+<script src="/config.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=REPLACE_WITH_PAYPAL_CLIENT_ID&vault=true"></script>
+<script src="/donate.js"></script></body></html>

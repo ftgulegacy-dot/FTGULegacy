@@ -1,0 +1,7 @@
+firebase.initializeApp(FIREBASE_CONFIG);
+const auth = firebase.auth(); const db = firebase.firestore(); const storage = firebase.storage();
+auth.onAuthStateChanged(user=>{});
+async function createPost(){ const title=document.getElementById('postTitle').value; const content=document.getElementById('postContent').value; const file=document.getElementById('postImage').files[0]; if(!title||!content) return alert('Add title and content'); let imageUrl=''; if(file){ const path='posts/'+Date.now()+'-'+file.name; const snap=await storage.ref(path).put(file); imageUrl=await snap.ref.getDownloadURL(); } const user=auth.currentUser; await db.collection('posts').add({title,content,imageUrl,authorId:user?user.uid:null,authorName:user?user.email.split('@')[0]:'anon',created_at: firebase.firestore.FieldValue.serverTimestamp()}); alert('Posted'); renderFeed(); }
+async function renderFeed(){ const feed=document.getElementById('feedList'); if(!feed) return; const snap=await db.collection('posts').orderBy('created_at','desc').limit(50).get(); feed.innerHTML=''; snap.forEach(doc=>{ const p=doc.data(); const div=document.createElement('div'); div.className='post'; div.innerHTML='<h4>'+escapeHtml(p.title)+'</h4><p>'+escapeHtml(p.content)+'</p><div class="small">by '+(p.authorName||'anon')+'</div>'; feed.appendChild(div); }); }
+function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+document.addEventListener('DOMContentLoaded', renderFeed);
